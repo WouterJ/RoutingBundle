@@ -17,13 +17,26 @@ use Symfony\Cmf\Bundle\RoutingBundle\Tests\Functional\BaseTestCase;
 
 class RedirectRouteTest extends BaseTestCase
 {
-    const ROUTE_ROOT = '/test/redirectroute';
+    const ROUTE_ROOT = '/test/redirectroute-functional';
 
-    public function setUp()
+    protected function setUp()
     {
-        parent::setUp();
-        $this->db('PHPCR')->createTestNode();
+        $this->makeSureTestRootExists();
         $this->createRoute(self::ROUTE_ROOT);
+    }
+
+    /**
+     * Cleans up the created nodes in the database.
+     */
+    protected function tearDown()
+    {
+        $root = $this->getDm()->find(null, self::ROUTE_ROOT);
+
+        if ($root) {
+            $this->getDm()->remove($root);
+            $this->getDm()->flush();
+            $this->getDm()->clear();
+        }
     }
 
     public function testRedirectDoctrine()

@@ -54,6 +54,11 @@ class BaseTestCase extends ComponentBaseTestCase
      */
     protected function createContent($path = '/test/content')
     {
+        $content = $this->getDm()->find(null, $path);
+        if ($content) {
+            return $content;
+        }
+
         $content = new Content();
         $content->setId($path);
         $content->setTitle('Foo Content');
@@ -61,5 +66,12 @@ class BaseTestCase extends ComponentBaseTestCase
         $this->getDm()->flush();
 
         return $content;
+    }
+
+    protected function makeSureTestRootExists()
+    {
+        if (!$this->getDm()->find(null, '/test')) {
+            $this->db('PHPCR')->createTestNode();
+        }
     }
 }
