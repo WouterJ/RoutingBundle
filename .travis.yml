@@ -46,7 +46,7 @@ before_script:
   - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
   - php vendor/symfony-cmf/testing/bin/console doctrine:phpcr:fixtures:load --fixtures=Tests/Resources/DataFixtures --no-interaction
 
-script: if [ "$TRAVIS_PHP_VERSION" != "7.0" ]; then php ./phpunit; else phpunit; fi
+script: phpunit
 
 notifications:
   irc: "irc.freenode.org#symfony-cmf"
