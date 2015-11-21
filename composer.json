@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "symfony-cmf/core-bundle": "^1.1",
-        "symfony-cmf/testing": "^1.3@dev",
+        "symfony-cmf/testing": "dev-fix-travis-shell",
         "doctrine/phpcr-odm": "^1.3@rc",
         "matthiasnoback/symfony-dependency-injection-test": "~0.6",
         "matthiasnoback/symfony-config-test": "0.*",

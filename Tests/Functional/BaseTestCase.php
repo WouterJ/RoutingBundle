@@ -29,6 +29,17 @@ class BaseTestCase extends ComponentBaseTestCase
         return $dm;
     }
 
+    protected function removeNode($path)
+    {
+        $root = $this->getDm()->find(null, $path);
+
+        if ($root) {
+            $this->getDm()->remove($root);
+            $this->getDm()->flush();
+            $this->getDm()->clear();
+        }
+    }
+
     /**
      * @param string $path
      *
@@ -68,7 +79,7 @@ class BaseTestCase extends ComponentBaseTestCase
         return $content;
     }
 
-    protected function makeSureTestRootExists()
+    protected function initTestRoot()
     {
         if (!$this->getDm()->find(null, '/test')) {
             $this->db('PHPCR')->createTestNode();

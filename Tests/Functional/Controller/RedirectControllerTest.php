@@ -30,25 +30,16 @@ class RedirectControllerTest extends BaseTestCase
      */
     protected function setUp()
     {
-        $this->makeSureTestRootExists();
+        $this->initTestRoot();
         $this->createRoute(self::ROUTE_ROOT);
 
         $router = $this->getContainer()->get('router');
         $this->controller = new RedirectController($router);
     }
 
-    /**
-     * Cleans up the created nodes in the database.
-     */
     protected function tearDown()
     {
-        $root = $this->getDm()->find(null, self::ROUTE_ROOT);
-
-        if ($root) {
-            $this->getDm()->remove($root);
-            $this->getDm()->flush();
-            $this->getDm()->clear();
-        }
+        $this->removeNode(self::ROUTE_ROOT);
     }
 
     public function testRedirectUri()

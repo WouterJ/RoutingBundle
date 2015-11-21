@@ -44,6 +44,7 @@ before_install:
 install: composer update --prefer-dist $COMPOSER_FLAGS
 
 before_script:
+  - vendor/symfony-cmf/testing/bin/travis/doctrine_orm.sh
   - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
   - php vendor/symfony-cmf/testing/bin/console doctrine:phpcr:fixtures:load --fixtures=Tests/Resources/DataFixtures --no-interaction
 
